@@ -1,24 +1,32 @@
 <script>  
+    import iziToast from "izitoast";
+    import 'izitoast/dist/css/iziToast.min.css';
+    import 'izitoast/dist/js/iziToast.min.js';
 
-    let message = "";
     let username = "";
     let password = "";
     let inputUsername;
-    let inputPassword;
-    let showAlert = false;
+    let inputPassword;   
     let data = {jean: {username: "jean", password: "1234"},
                     karina: {username: "karina", password: "12345"}};
 
-    function login(e) {
+    const mensajeWarning = (mensaje) => {
+        iziToast.warning({
+            title: 'Caution',           
+            message: mensaje,
+            timeout: 1500,     
+            position: 'topLeft'      
+        });
+    }
+
+    function login(e) {        
 
         if (!username) {            
             inputUsername.focus();
-            message = "REGISTER USERNAME !";
-            showAlert = true;
+            mensajeWarning("Register username!");
         } else if (!password) {
             inputPassword.focus();
-            message = "REGISTER PASSWORD !";
-            showAlert = true;
+            mensajeWarning("Register password!");
         } else {
 
             if (username in data) {
@@ -26,13 +34,11 @@
                     alert("ingresastes")
                 } else {
                     inputPassword.focus();
-                    message = "PASSWORD INVALID !";
-                    showAlert = true;
+                    mensajeWarning("Invalid password!");
                 }
             } else {
-                inputUsername.focus();
-                message = "USERNAME INVALID !";
-                showAlert = true;
+                inputUsername.focus();   
+                mensajeWarning("Invalid username!");            
             }
         }   
 
@@ -40,13 +46,6 @@
 </script>
 
 <main class="container d-flex justify-content-center align-items-center vh-100">  
-        
-    { #if showAlert }     
-    <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
-        <strong> { message } </strong>
-        <button type="button" class="btn-close" on:click={ () => showAlert = false }></button>
-    </div>   
-    { /if }    
 
     <div class="login">        
         <h1 class="text-center mt-4">LOGIN</h1>
