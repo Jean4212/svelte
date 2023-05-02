@@ -1,8 +1,8 @@
 <script>	
-	import Main from "./main.svelte"	
+	import Login from "./login.svelte"	
 </script>
 
-<Main></Main>
+<Login></Login>
 
 <style>	
 </style>

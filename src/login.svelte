@@ -1,48 +1,56 @@
-<script>  
+<script>    
     import iziToast from "izitoast";
     import 'izitoast/dist/css/iziToast.min.css';
     import 'izitoast/dist/js/iziToast.min.js';
-
-    let username = "";
-    let password = "";
+       
     let inputUsername;
     let inputPassword;   
-    let data = {jean: {username: "jean", password: "1234"},
-                    karina: {username: "karina", password: "12345"}};
+    //let users = {jean: {username: "jean", password: "1234"},
+    //            karina: {username: "karina", password: "12345"}};
 
-    const mensajeWarning = (mensaje) => {
+    const mostrarMensaje = (mensaje) => {
         iziToast.warning({
-            title: 'Caution',           
-            message: mensaje,
+            title: 'Caution',
             timeout: 1500,     
-            position: 'topLeft'      
+            position: 'topLeft',
+            message: mensaje  
         });
     }
 
-    function login(e) {        
+    async function validarUsuario() {
+        let username = inputUsername.value
+        let password = inputPassword.value
 
         if (!username) {            
             inputUsername.focus();
-            mensajeWarning("Register username!");
+            mostrarMensaje("Register username!");
         } else if (!password) {
             inputPassword.focus();
-            mensajeWarning("Register password!");
+            mostrarMensaje("Register password!");
         } else {
 
-            if (username in data) {
-                if (data[username].password === password) {
+            const url = "http://localhost:8000/login";
+            const datos = {username, password};
+            const options = {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(datos)
+            };
+            const users = await fetch(url, options);
+            return
+            if (username in users) {
+                if (users[username].password === password) {
                     alert("ingresastes")
                 } else {
                     inputPassword.focus();
-                    mensajeWarning("Invalid password!");
+                    mostrarMensaje("Invalid password!");
                 }
             } else {
                 inputUsername.focus();   
-                mensajeWarning("Invalid username!");            
+                mostrarMensaje("Invalid username!");            
             }
-        }   
-
-    }            
+        }  
+    }          
 </script>
 
 <main class="container d-flex justify-content-center align-items-center vh-100">  
@@ -56,8 +64,7 @@
                 class="form-control"
                 id="floatingInput"
                 placeholder="Username"
-                maxlength="10"
-                bind:value={ username }
+                maxlength="10"               
                 bind:this={ inputUsername }
                 required/>
             <label for="floatingInput">Username</label>
@@ -69,28 +76,27 @@
                 class="form-control"
                 id="floatingPassword"
                 placeholder="Password"
-                maxlength="10"
-                bind:value={ password }
+                maxlength="10"              
                 bind:this={ inputPassword }
                 required/>
             <label for="floatingPassword">Password</label>
         </div>
+
         <div class="form-floating mt-4">
-            <button class="w-100 btn btn-lg btn-primary" type="submit" on:click={ login }>SIGN IN </button>  
+            <button class="w-100 btn btn-lg btn-primary" type="submit" on:click={ validarUsuario }>SIGN IN</button>  
         </div>            
     </div>
   
 </main>  
-    
 
 <style>
   .login {   
     width: 280px;   
-    height: 330px;
-    background-color: yellow;
+    height: 330px;  
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.5);
-  }  
+  }
+
   .form-floating {
     width: 80%;
     left: 10%;
