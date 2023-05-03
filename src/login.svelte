@@ -36,7 +36,19 @@
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(datos)
             };
-            const users = await fetch(url, options);
+
+            const response = await fetch(url, options);
+            
+            if (response.ok) {
+                const respuesta = await response.json();
+                console.log(respuesta);
+                
+                
+
+
+                
+            }
+            
             return
             if (username in users) {
                 if (users[username].password === password) {
