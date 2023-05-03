@@ -1,8 +1,24 @@
 <script>	
-	import Login from "./login.svelte"	
+	import Login from "./login.svelte";	
+	
+	let login = false;
+
+	function manejarEventoPersonalizado() {
+    	console.log("fdsfsdfsad");
+		if (login) {
+			login = false;
+		} else {
+			login = true;
+		}
+  	}
 </script>
 
-<Login></Login>
+{#if !login}
+<Login on:pulso={ manejarEventoPersonalizado }/>
+{:else}
+<p>hola</p>
+{/if}
 
-<style>	
+
+<style>
 </style>

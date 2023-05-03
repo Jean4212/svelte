@@ -1,18 +1,19 @@
 <script>    
     import iziToast from "izitoast";
-    import 'izitoast/dist/css/iziToast.min.css';
-    import 'izitoast/dist/js/iziToast.min.js';
+    import "izitoast/dist/css/iziToast.min.css";
+    import "izitoast/dist/js/iziToast.min.js";
+    import { createEventDispatcher } from 'svelte';
+  
+    const dispatch = createEventDispatcher();
        
     let inputUsername;
     let inputPassword;   
-    //let users = {jean: {username: "jean", password: "1234"},
-    //            karina: {username: "karina", password: "12345"}};
 
     const mostrarMensaje = (mensaje) => {
         iziToast.warning({
-            title: 'Caution',
-            timeout: 1500,     
-            position: 'topLeft',
+            title: "Caution",
+            timeout: 1500,   
+            position: "topLeft",
             message: mensaje  
         });
     }
@@ -37,29 +38,25 @@
                 body: JSON.stringify(datos)
             };
 
-            const response = await fetch(url, options);
-            
+            const response = await fetch(url, options);          
             if (response.ok) {
-                const respuesta = await response.json();
-                console.log(respuesta);
+                const responseJson = await response.json();
                 
-                
-
-
-                
-            }
-            
-            return
-            if (username in users) {
-                if (users[username].password === password) {
-                    alert("ingresastes")
-                } else {
+                if (!responseJson.username) {
+                    inputUsername.focus();   
+                    mostrarMensaje("Invalid username!");                 
+                } else if (!responseJson.password) {
                     inputPassword.focus();
                     mostrarMensaje("Invalid password!");
+                } else {
+                    iziToast.success({
+                        title: "Success",
+                        timeout: 1500,   
+                        position: "topLeft",
+                        message: "Username and Password Valid !"  
+                    });                   
+                    dispatch("pulso");
                 }
-            } else {
-                inputUsername.focus();   
-                mostrarMensaje("Invalid username!");            
             }
         }  
     }          
