@@ -21,31 +21,33 @@
     
 <div class="container">    
     <div class="sidebar">
-        <button class="item logo" on:click={() => showMenu("1")}>
-            <i class="bi-bootstrap fs-1"/>
+        <button class="item logo" on:click={() => showMenu("0")}>
+            <i class="bi bi-bootstrap-fill fs-1"/>
         </button>
         <button class="item" on:click={() => showMenu("1")}>
-            <i class="bi-house fs-1"/>
+            <i class="bi bi bi-clipboard-data fs-1"/> <p class="title">Reporte</p>
         </button>
         <button class="item" on:click={() => showMenu("2")}>
-            <i class="bi-truck fs-1"/>
+            <i class="bi bi-truck fs-1"/> <p class="title">Equipo  </p>
         </button>
         <button class="item" on:click={() => showMenu("3")}>             
-            <i class="bi-calendar2-check fs-1"/>
+            <i class="bi bi-calendar2-check fs-1"/> <p class="title">Horario</p>
         </button>
         <button class="item" on:click={() => showMenu("4")}>
-            <i class="bi-heart-pulse fs-1"/>
+            <i class="bi bi-heart-pulse fs-1"/> <p class="title">Salud</p>
         </button>
         <button class="item" on:click={() => showMenu("5")}>
-            <i class="bi-people fs-1"/>
+            <i class="bi bi-people fs-1"/> <p class="title">Personal</p>
         </button>
         <button class="item close" on:click={deleteCookies}>
-            <i class="bi-box-arrow-left fs-1 text-danger"/>
+            <i class="bi bi-arrow-left-square fs-1 text-danger"/> <p class="title">Salir</p>
         </button>        
     </div>
 
-    <div class="panel">   
-        {#if Menu === "1"}
+    <div class="panel">
+        {#if Menu === "0"}
+            <p>Home</p>    
+        {:else if Menu === "1"}
             <p>Menu 1</p>
         {:else if Menu === "2"}
             <p>Menu 2</p>
@@ -89,6 +91,11 @@
         color: #d12727;
     }
 
+    .title {
+        font-size: 1rem;        
+        margin-top: -18px;
+    }
+
     @media screen and (min-width: 460px){
         .container {
             grid-template-columns: 80px 1fr;       
@@ -101,7 +108,7 @@
         
         .item {
             font-size: 3rem;
-            margin-bottom: 1rem;              
+            margin-bottom: 0.70rem;              
         }
 
         .close {
@@ -116,5 +123,11 @@
         .close:hover {
             color: #c00707; 
         }       
+    }
+
+    @media screen and (max-width: 460px){
+        .title {
+            display: none;
+        }
     }
 </style>

@@ -1,8 +1,6 @@
-<script>
-    import { onMount } from 'svelte';
-
+<script>    
     let lista = [];
-
+   
     for (let num = 1; num <= 90; num++) {
         if (num === 90) {
             lista.push({dni: "48555618", paterno: "Oropeza", materno: "Inca", nombre: "Jeancarlos Marcelo", ingreso: "01/01/2020", cargo: "Operador de grua liviana"});
@@ -10,39 +8,36 @@
             lista.push({dni: "48555618", paterno: "Oropeza", materno: "Inca", nombre: "Jeancarlos Alberto", ingreso: "01/01/2020", cargo: "Operador de grua liviana"});
         };
     }
-    
+         
     let currentPage = 0;
     let itemsPerPage = 15;
-    let showPage = lista.slice(0, itemsPerPage);
 
-    function getCurrentPageItems() {
+    let totalPages = Math.ceil(lista.length / itemsPerPage);
+
+    let showPage = lista.slice(currentPage, itemsPerPage);
+
+    function getCurrentPageItems(page) {
+        currentPage = page;
         const startIndex = currentPage * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        showPage = lista.slice(startIndex, endIndex);        
-    }
+        showPage = lista.slice(startIndex, endIndex);  
+        
+        for (let i = 1; i <= totalPages; i++) {
+            let name = "btn" + (i - 1)
+            const elemento = document.getElementById(name);
+            elemento.classList.remove("active");
+            console.log(i-1);
+        }
 
-    function setCurrentPage(page) {
-        currentPage = page;
-    }
+        let btn_activo = "btn" + page
+        const activo = document.getElementById(btn_activo);
+        activo.classList.add("active");  
 
-    function getTotalPages() {
-        return Math.ceil(lista.length / itemsPerPage);
-    }
-
-    function loadPages(page) {
-        setCurrentPage(page);
-        getCurrentPageItems();
-    }
-
-    let totalPages;
-
-    onMount(() => {
-        totalPages = getTotalPages();       
-    });   
+    }   
 </script>
 
 <div class="container">
-    <h2 class="title">Trabajadores</h2>   
+    <h2 class="title">Personal</h2>   
     <table>
         <thead>
             <tr>
@@ -64,10 +59,10 @@
                     <td>{person.cargo}</td>
                     <td>
                         <button class="options">
-                            <i class="bi bi-file-earmark-text"></i>
+                            <i class="bi bi-file-text"></i>
                         </button>
                         <button class="delete">
-                            <i class="bi bi-trash"></i>
+                            <i class="bi bi-trash3"></i>
                         </button>
                     </td>
                 </tr>
@@ -77,7 +72,7 @@
        
     <nav class="pagination">       
         {#each Array.from({ length: totalPages }) as _, i}               
-            <button class="page" id="btn{i}" on:click={() => loadPages(i)}>{i + 1}</button>               
+            <button class:active={i === 0} class="page" id="btn{i}" on:click={() => getCurrentPageItems(i)}>{i + 1}</button>               
         {/each}       
     </nav>
 </div>
@@ -106,36 +101,41 @@
     }
 
     .options {
-        margin-right: 2px;        
-        border: none;        
-        padding: 0.1rem;        
+        padding: 0 0.1rem;             
+        border: none;  
         border-radius: 5px;
         background-color: transparent;
-        color: black;
+        color: #151616;
         font-size: 1rem;
+        transition: transform 0.3s ease-in-out;
     }
 
-    .options:hover {
-        background-color: #0b329e;
-        color: #e0e4e6;
+    .options:hover {   
+        color: #0a2df1;
+        background-color: #cacde7;     
+        transform: scale(1.1);
     }
 
     .delete {
-        border: none;
-        padding: 0.1rem;
+        padding: 0 0.1rem;
+        border: none;      
         border-radius: 5px;  
         background-color: transparent;
-        color: black;  
-        font-size: 1rem;      
+        color: #151616;  
+        font-size: 1rem;  
+        transition: transform 0.3s ease-in-out;    
+        margin-left: 3px;
     }
     
-    .delete:hover {
-        background-color: #c50f0f;
-        color: #e0e4e6;
+    .delete:hover {       
+        color: #f10a0a;
+        background-color: #e7caca;
+        transform: scale(1.1);
+        
     }
 
     .pagination {   
-        margin: 0.8rem 0;   
+        margin: 0.9rem 0;   
         display: flex;
         flex-direction: row;
         justify-content: center;             
@@ -164,6 +164,11 @@
         font-weight: bold;
     }
 
+    .active {       
+        font-weight: bold;
+        transform: scale(1.1);  
+    }
+   
     @media screen and (min-width: 460px) {
         .container {
             padding: 1rem;           
@@ -206,5 +211,4 @@
             font-size: 0.8rem;  
         }
     }
-
 </style>
