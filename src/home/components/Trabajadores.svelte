@@ -7,7 +7,7 @@
         } else {
             lista.push({dni: "48555618", paterno: "Oropeza", materno: "Inca", nombre: "Jeancarlos Alberto", ingreso: "01/01/2020", cargo: "Operador de grua liviana"});
         };
-    }
+    };
          
     let currentPage = 0;
     let itemsPerPage = 15;
@@ -23,17 +23,16 @@
         showPage = lista.slice(startIndex, endIndex);  
         
         for (let i = 1; i <= totalPages; i++) {
-            let name = "btn" + (i - 1)
+            let name = "btn" + (i - 1);
             const elemento = document.getElementById(name);
             elemento.classList.remove("active");
             console.log(i-1);
-        }
+        };
 
-        let btn_activo = "btn" + page
+        let btn_activo = "btn" + page;
         const activo = document.getElementById(btn_activo);
         activo.classList.add("active");  
-
-    }   
+    };
 </script>
 
 <div class="container">
@@ -76,7 +75,6 @@
         {/each}       
     </nav>
 </div>
-
 
 <style>
     .container {
