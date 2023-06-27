@@ -83,6 +83,22 @@
         flex-direction: column;              
     }
 
+    table thead {
+        background-color: #edf0f3;        
+    }
+
+    tbody tr:hover {
+        background-color: #d0dff0;
+    }    
+
+    table tbody {
+        background-color: #f7f9fa;       
+    }
+
+    tbody button {
+        cursor: pointer;
+    }
+   
     table td:nth-child(3),
     table th:nth-child(3),
     table td:nth-child(4),
@@ -128,8 +144,7 @@
     .delete:hover {       
         color: #f10a0a;
         background-color: #e7caca;
-        transform: scale(1.1);
-        
+        transform: scale(1.1);        
     }
 
     .pagination {   
@@ -144,19 +159,7 @@
         cursor: pointer;
         margin: 0 1px;
     }
-
-    tbody button {
-        cursor: pointer;
-    }
-
-    thead th {
-        background-color: #f1fcf5;
-    }
-
-    tbody tr:hover {
-        background-color: #f5f5f5;
-    }    
-
+   
     .page:active {
         transform: scale(1.1);
         font-weight: bold;
