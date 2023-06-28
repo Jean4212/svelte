@@ -5,12 +5,12 @@
         if (num === 90) {
             lista.push({dni: "48555618", paterno: "Oropeza", materno: "Inca", nombre: "Jeancarlos Marcelo", ingreso: "01/01/2020", cargo: "Operador de grua liviana"});
         } else {
-            lista.push({dni: "48555618", paterno: "Oropeza", materno: "Inca", nombre: "Jeancarlos Alberto", ingreso: "01/01/2020", cargo: "Operador de grua liviana"});
+            lista.push({dni: "48555618", paterno: "Oropeza", materno: "Collahuacho", nombre: "Jeancarlos Alberto Miguel", ingreso: "01/01/2020", cargo: "Operador de Grua Semi Pesada"});
         };
     };
          
     let currentPage = 0;
-    let itemsPerPage = 15;
+    let itemsPerPage = 20;
 
     let totalPages = Math.ceil(lista.length / itemsPerPage);
 
@@ -36,7 +36,7 @@
 </script>
 
 <div class="container">
-    <h2 class="title">Personal</h2>   
+    <h2>Personal</h2>   
     <table>
         <thead>
             <tr>
@@ -56,12 +56,12 @@
                     <td>{person.dni}</td>                    
                     <td>{person.ingreso}</td>
                     <td>{person.cargo}</td>
-                    <td>
+                    <td class="menu">
                         <button class="options">
-                            <i class="bi bi-file-text"></i>
+                            <img src="Mas.svg"  height="21" alt="mas">  
                         </button>
                         <button class="delete">
-                            <i class="bi bi-trash3"></i>
+                            <img src="Del.svg"  height="21" alt="del">    
                         </button>
                     </td>
                 </tr>
@@ -79,26 +79,24 @@
 <style>
     .container {
         width: 100%;
+        padding: 5px;
         display: flex;
-        flex-direction: column;              
+        flex-direction: column;    
+        font-size: 0.9rem;          
     }
 
     table thead {
-        background-color: #edf0f3;        
+        background-color: #bcdff3;        
     }
-
-    tbody tr:hover {
-        background-color: #d0dff0;
-    }    
 
     table tbody {
         background-color: #f7f9fa;       
     }
 
-    tbody button {
-        cursor: pointer;
-    }
-   
+    tbody tr:hover {
+        background-color: #d0dff0;
+    }    
+     
     table td:nth-child(3),
     table th:nth-child(3),
     table td:nth-child(4),
@@ -106,110 +104,64 @@
         text-align: center;
     }
 
-    table td:nth-child(6),
-    table th:nth-child(6)  {        
+    .menu  {        
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        justify-content: center;       
+        gap: 4px     
     }
 
-    .options {
-        padding: 0 0.1rem;             
-        border: none;  
-        border-radius: 5px;
-        background-color: transparent;
-        color: #151616;
-        font-size: 1rem;
+    .options, .delete {  
+        width: 21px;
+        height: 21px;             
+        cursor: pointer;
+        border: none;
+        background-color: transparent;    
         transition: transform 0.3s ease-in-out;
     }
 
-    .options:hover {   
-        color: #0a2df1;
-        background-color: #cacde7;     
-        transform: scale(1.1);
-    }
-
-    .delete {
-        padding: 0 0.1rem;
-        border: none;      
-        border-radius: 5px;  
-        background-color: transparent;
-        color: #151616;  
-        font-size: 1rem;  
-        transition: transform 0.3s ease-in-out;    
-        margin-left: 3px;
-    }
-    
-    .delete:hover {       
-        color: #f10a0a;
-        background-color: #e7caca;
-        transform: scale(1.1);        
-    }
-
     .pagination {   
-        margin: 0.9rem 0;   
+        margin-top: 15px;     
         display: flex;
-        flex-direction: row;
-        justify-content: center;             
+        flex-direction: row;        
+        justify-content: center;   
+        gap: 2px;          
     }
    
     .page {
-        width: 1.5rem;
-        cursor: pointer;
-        margin: 0 1px;
+        width: 20px;
+        cursor: pointer;        
     }
    
-    .page:active {
-        transform: scale(1.1);
-        font-weight: bold;
-    }
-
     .active {       
         font-weight: bold;
         transform: scale(1.1);  
     }
-   
+
     @media screen and (min-width: 460px) {
-        .container {
-            padding: 1rem;           
-        }
-
-        .title {
-            margin-bottom: 0.5rem;
+        .options:hover, .delete:hover {    
+            transform: scale(1.1);
         }
     }
-
-    @media screen and (max-width: 460px) {  
-        .title {
-            margin: 0.5rem 0;
-        }
-    }
-
-    @media screen and (max-width: 370px) {
+      
+    @media screen and (max-width: 600px) {
         table td:nth-child(3),
         table th:nth-child(3) {
             display: none;
         }
-    }
+    }  
 
-    @media screen and (max-width: 440px) {
+    @media screen and (max-width: 700px) {
         table td:nth-child(4),
         table th:nth-child(4) {
-            display: none;            
+            display: none;
         }
-    }
+    }   
     
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 1000px) {
         table td:nth-child(5),
         table th:nth-child(5) {
             display: none;
         }        
-    }
-
-    @media screen and (max-width: 900px) {        
-        .container {
-            font-size: 0.8rem;  
-        }
-    }
+    }  
 </style>

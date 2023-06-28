@@ -1,7 +1,6 @@
 <script>
     import Trabajadores from "./components/Trabajadores.svelte";
-    import Horario from "./components/Horario.svelte";
-    import Salud from "./components/Salud.svelte";
+    import Horario from "./components/Horario.svelte";   
     import Cookies from "js-cookie";
   
     let Menu = sessionStorage.getItem("Menu");  
@@ -42,10 +41,7 @@
     </div>
 
     <div class="panel">
-        {#if Menu === "0"}
-            <p>Home</p>    
-
-        {:else if Menu === "1"}
+        {#if Menu === "1"}           
             <p>Menu 1</p>
 
         {:else if Menu === "2"}
@@ -55,7 +51,7 @@
             <Horario />
 
         {:else if Menu === "4"}
-            <Salud />
+            <p>Menu 2</p>
 
         {:else if Menu === "5"}
             <Trabajadores />
@@ -79,7 +75,7 @@
     }
         
     .item {
-        background-color: rgb(230, 230, 238);
+        background-color: #e6e6ee;
         border: none;        
         cursor: pointer;
         outline: none;
@@ -87,14 +83,6 @@
         border-radius: 10px;
     }    
 
-    .item1 {
-        margin-top: 6px;
-    }
-
-    .panel {
-        background-color: aquamarine;
-    }
-   
     @media screen and (min-width: 460px){
         .container {
             grid-template-columns: 80px 1fr;       
@@ -111,6 +99,10 @@
             padding-bottom: 2px;
             margin-left: 6px;
             margin-right: 6px;
+        }
+
+        .item1 {
+            margin-top: 6px;
         }
        
         .item:hover {         
